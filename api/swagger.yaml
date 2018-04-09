@@ -1,0 +1,81 @@
+swagger: '2.0'
+info:
+  description: Cryptocurrencies News API
+  version: 1.0.0
+  title: Suri-cryptonews
+  termsOfService: ''
+  contact:
+    email: nicolas.gorrity@gmail.com
+  license:
+    name: ISC
+    url: 'https://www.gnu.org/licenses/license-list.html#ISC'
+host: address.server.fr
+basePath: /
+tags:
+  - name: getcrypto
+    description: >-
+      Get the cryptocurrencies values of today
+schemes:
+  - https
+paths:
+  /getcrypto:
+    post:
+      tags:
+        - getcrypto
+      summary: >-
+        Get the specified cryptocurrency value 
+      description: ''
+      operationId: getcrypto
+      consumes:
+        - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: "body"
+        in: "body"
+        description: "See definition of Input object"
+        required: true
+        schema:
+          $ref: '#/definitions/Input'
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: '#/definitions/OutputMessages'
+        '400':
+          description: Bad request
+        '503':
+          description: Service unavailable
+      x-swagger-router-controller: Getcrypto
+definitions:
+  OutputMessages:
+    properties:
+      message:
+        type: string
+  Input:
+    type: "object"
+    properties:
+      currency:
+        type: "string"
+        description: "Name of the desired cryptocurrency - REQUIRED"
+        example: "bitcoin"
+        enum: 
+        - "bitcoin"
+        - "iota"
+        - "ethereum"
+        - "verge"
+        - "litecoin"
+        - "ripple"
+        - "bitcoin-cash"
+        - "eos"
+        - "cardano"
+        - "stellar"
+        - "neo"
+        - "monero"
+        - "dash"
+        - "tron"
+        - "tether"
+        - "nem"
+        - "omisego"
+        - "stratis"
+        - "waves"
