@@ -40,7 +40,8 @@ exports.getcrypto = function(args, res, next) {
 			}
 			else {
 				var value = Number.parseFloat(parseFloat(r_res.body[0].price_eur)).toFixed(2);
-	            toReturn[Object.keys(toReturn)[0]].messages = 'La cryptomonnaie ' + crypto + ' vaut actuellement ' + value + ' euros.';
+				var evolution = r_res.body[0].percent_change_24h;
+	            toReturn[Object.keys(toReturn)[0]].messages = "La cryptomonnaie " + crypto + " vaut actuellement " + value + " euros. L'action a évolué de " + evolution + "% les dernières 24 heures.";
 			}
         }
         res.end(JSON.stringify(toReturn[Object.keys(toReturn)[0]] || {}, null, 2));
